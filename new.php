@@ -1,6 +1,12 @@
 <?php
 include_once __DIR__ . '/header.php';
 require __DIR__ . '/bootstrap.php';
+
+if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
+    header('Location: http://localhost:8898/Dbank/login.php');
+    die;
+}
+
 // $d =  $client['date'];
 $individualAccountNum = rand(1234, 9876);
 $idnum = createID();
@@ -46,9 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <div class="container">
 
-    <h5>Fill the fields to add a new account</h5>
 
     <body>
+        <h4>Hello, <?= $_SESSION['user']['name'] ?></h4>
+        <a href="<?= URL ?>login.php?logout">LogOut</a>
+        <h5>Fill the fields to add a new account</h5>
         <form class="row row-cols-lg-auto align-items-center" method="post">
             <div class="row">
                 <div class="col">
