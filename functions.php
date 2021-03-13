@@ -53,7 +53,7 @@ function createClient($client): void
     //$id = getNextId();
     $client['id'] = getNextId();
     $clients[] = $client;
-    $_SESSION['messages']['success'][] = "ACCOUNT was created!";
+    // $_SESSION['messages']['success'][] = "ACCOUNT was created!";
     write($clients);
 }
 

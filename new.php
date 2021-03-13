@@ -16,28 +16,27 @@ $iban = bankIban();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $client['name'] = $_POST['name'];
     $client['surname'] = $_POST['surname'];
-    $client['date'] = $_POST['date'];
+    // $client['date'] = $_POST['date'];
     $client['idn'] = $_POST['idn'];
     $client['balance'] = 0;
-
     $client['AC'] = $_POST['AC'];
+
 
     $nameLength = strlen($_POST['name']);
     $surnameLength = strlen($_POST['surname']);
 
-    if (isset($_POST['name']) || isset($_POST['surname'])) {
+    if (isset($_POST['name']) && isset($_POST['surname'])) {
         if ($nameLength < 3 || $surnameLength < 3) {
 
-            // alert("Name or Surname are too short");
+            echo    alert("Name or Surname are too short");
 
-            exit(alert("Name or Surname are too short"));
+            // exit(alert("Name or Surname are too short"));
+        } else {
+
+            createClient($client); // sukuria
+            header('Location: ' . URL . '/main.php');
+            die;
         }
-    } else {
-
-        createClient($client); // sukuria
-
-        header('Location: ' . URL . 'main.php');
-        die;
     }
 }
 ?>
@@ -67,10 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" value=""
                         name="surname">
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                     <input type="date" class="form-control" placeholder="Date" aria-label="Last name" value=""
                         name="date">
-                </div>
+                </div> -->
                 <div class="col">
                     <input type="number" class="form-control" placeholder="ID number" aria-label="ID Number"
                         value="<?= $idnum ?>" name="idn">
